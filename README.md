@@ -1,7 +1,7 @@
 
 # JavaScript review, GitHub practice
 
-jsreview.js file content at this point
+/jsreview/jsreview.js file content at this point
 
 ```javascript
 const textMessage = "This is the JavaScript review file";
@@ -32,7 +32,7 @@ console.log(`Password: ${password}`);
 ```
 
 ## Variables
-In JavaScript, you can declare variables using three different keywords: var, let, and const. Each has its own usage and scope.
+In JavaScript, you can declare variables using three different keywords: `var`, `let`, and `const`. Each has its own usage and scope.
 
 * `var`: This is the oldest way to declare variables in JavaScript. It has function scope and can be redeclared and reassigned.
 * `let`: Introduced in ES6, let allows block scope variables that can be reassigned but not redeclared.
@@ -131,7 +131,7 @@ console.log(data.username); // Output: "tomsmith"
 console.log(data.baseUrl); // Output: "https://the-internet.herokuapp.com/"
 ```
 
-##  GitHub Update practice :octocat: ------------------------------------------------------
+##  GitHub Update practice :octocat: 
 
 Run the following commands to push updates to GitHub repo:
 
@@ -229,7 +229,7 @@ const greeting1 = greetReturn("Jane");
 console.log(greeting1); // Output: Hello, Jane!
 ```
 
-##  GitHub Update practice :octocat: ------------------------------------------------------
+##  GitHub Update practice :octocat: 
 
 Run the following commands to push updates to GitHub repo:
 
