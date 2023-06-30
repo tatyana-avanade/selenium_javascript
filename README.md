@@ -101,6 +101,10 @@ npm install chai
 npm install --save-dev mochawesome
 ```
 
+### 6. Add .gitignore file to your project
+```env
+
+```
 # Create Selenium script
 
 ### Common interactions with web elements using Selenium and JavaScript

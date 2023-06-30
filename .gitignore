@@ -1,0 +1,6 @@
+# Dependency directories
+/mochawesome-report
+
+# Other
+/node_modules
+
