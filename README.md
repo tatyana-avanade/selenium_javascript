@@ -1,249 +1,493 @@
+#  Selenium Mocha Framework Demo 
 
-# JavaScript review, GitHub practice
+ <mark>Page Object Model based Test Automation Framework with Selenium WebDriver, Mocha Testing Framework, Chai Assertion Library and Mochawesome Reports</mark> :coffee:
 
-/jsreview/jsreview.js file content at this point
 
-```javascript
-const textMessage = "This is the JavaScript review file";
-// Print the variable to the terminal window 
-console.log(textMessage);
+## Prerequisites
+* [Node.js](https://nodejs.org/) (with npm)
+* [Visual Studio Code](https://code.visualstudio.com/download)
+* Basic Knowledge of JavaScript 
+* Basic understanding of [Selenium WebDriver](https://selenium.dev)
+* Basic knowledge of Command Line Interface (CLI) and running commands in Terminal 
+* Basic understanding of git version control and :octocat: GitHub source control technologies
+
+
+## How Selenium Works with different browsers
+To use Selenium with different browsers, you need to download and install the appropriate web driver for each browser you want to automate. Here's where you can download the drivers for each browser:
+
+**Google Chrome**: The ChromeDriver can be downloaded from the official Selenium website at https://sites.google.com/a/chromium.org/chromedriver/downloads. You can download the driver version that matches your Chrome browser version.
+
+**Mozilla Firefox**: The GeckoDriver can be downloaded from the official Mozilla GitHub page at https://github.com/mozilla/geckodriver/releases. You can download the driver version that matches your Firefox browser version.
+
+**Microsoft Edge**: The EdgeDriver can be downloaded from the official Microsoft website at https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/. You can download the driver version that matches your Edge browser version.
+
+**Safari**: The SafariDriver is built into the Safari browser and is enabled through the Develop menu. To enable the Develop menu, go to Safari Preferences -> Advanced and check "Show Develop menu in menu bar". Then, go to the Develop menu and select "Allow Remote Automation".
+
+Once you have downloaded and installed the appropriate driver for each browser, you can use Selenium to automate the interaction with the browser in your test scripts.
+
+## Install Browser Drivers (Chrome browser)
+
+* Check the version of your Browser.
+* Download compatible browser driver i.e [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads).
+* Extract the chromedriver.exe to the local directory, i.e. C:/Tools.
+* Add C:/Tools to the PATH variable (Environment Variable) - this step may require restart.
+* Verify the chromedriver.exe binary works by running the following command in a command prompt or terminal window:
+
+```shell
+chromedriver --version
 ```
 
-## Comments
+![Screenshot](img/chromedriver_info.png)
 
-```javascript
-// Comment Shortcut in VScode: put cursor on the line or select multip lines and press Ctrl+/
+# Creating Selenium Framework
+
+
+
+## Create Project Directory
+
+`i.e. C:/_git_repos/selenium-mocha/>`
+
+This step can be done via file explorer or Terminal Window (in Command Prompt in Windows, for example)
+
+```shell
+mkdir selenium-mocha
 ```
 
-## About Semicolon
-* In JavaScript, the semicolon (;) is used to mark the end of a statement.
-* While it is optional in most cases, it is considered a good practice to include it to separate statements clearly, avoid potential issues with automatic semicolon insertion and to ensure code readability and maintainability.
-
-## About Quotes
-In JavaScript, single quotes (''), double quotes ("") and backticks (``) can be used in strings declarations and printing the output to console. 
-* Single quotes and double quotes are interchangeable and can be used to define simple string literals. 
-```javascript
-var username = "tomsmith";
-const password = 'SuperSecretPassword!';
-```
-* Backticks, also known as template literals, offer additional functionality. They allow for embedding expressions and variables within the string using ${}. 
-```javascript
-console.log(`Password: ${password}`);
+## Create /test folder
+```shell
+cd selenium-mocha
+mkdir test
 ```
 
-## Variables
-In JavaScript, you can declare variables using three different keywords: `var`, `let`, and `const`. Each has its own usage and scope.
 
-* `var`: This is the oldest way to declare variables in JavaScript. It has function scope and can be redeclared and reassigned.
-* `let`: Introduced in ES6, let allows block scope variables that can be reassigned but not redeclared.
-* `const`: Also introduced in ES6, const is used to declare variables that cannot be reassigned or redeclared. It has block scope.
+# Install Dependencies
+Start VSCode and open project folder.
 
+Run the following commands in Terminal window:
 
-```javascript
-var username = "tomsmith";
-var password = "SuperSecretPassword!";
+![Screenshot](img/terminal_command.png)
 
-let age = 30;
+### 1. Initialize Node.js Project
 
-const pi = 3.14;
+```shell
+npm init -y
 ```
 
-## Printing to Console
-
-```javascript
-console.log(username);
+### 2. Install Selenium
+```shell
+npm install selenium-webdriver
 ```
 
-```javascript
-// using string concatination
-console.log("Password: " + password);
-console.log("Age: " + age);
-console.log("Pi: " + pi);
+### 3. Install Testing Framework
+
+The "***npm install mocha***" command installs the Mocha test framework as a development dependency for your project. Mocha is a popular JavaScript test framework that is used to run automated tests for web applications.
+
+The "***npm install mocha-selenium***" command installs the ***Mocha Selenium adapter*** as a development dependency for your project. The Mocha Selenium adapter is a library that allows you to run Selenium tests with Mocha. 
+
+```shell
+npm install mocha
+```
+```
+npm install mocha-selenium
 ```
 
-```javascript
-// using template literals
-// note the ticks `` used instead of single or double quotes
-
-console.log(`Username: ${username}`);
-console.log(`Password: ${password}`);
-console.log(`Age: ${age}`);
-console.log(`Pi: ${pi}`);
+### 4. Install Assertion Library
+```shell
+npm install chai
 ```
 
-## Object Variables
-
-Object variables allow you to store multiple values as key-value pairs.
-
-```javascript
-const data = {
-    username: "tomsmith",
-    password: "SuperSecretPassword!",
-    baseUrl: "https://the-internet.herokuapp.com/",
-    pageTitle: "Welcome to the-internet"
-};
+### 5. Install Reporting Framework
+```bash
+npm install --save-dev mochawesome
 ```
 
-to print object variables using .notation
+# Create Selenium script
 
-```javascript
-console.log(data.username); // Output: "tomsmith"
-console.log(data.baseUrl); // Output: "https://the-internet.herokuapp.com/"
+### Common interactions with web elements using Selenium and JavaScript
+
+```js
+// Click a button
+await driver.findElement(By.id("button-id")).click();
+
+// Type text into a text field
+await driver.findElement(By.id("text-field-id")).sendKeys("Hello, World!");
+
+// Get the text content of an element (div)
+var divText = await driver.findElement(By.id("div-id")).getText();
+console.log(divText);
+
+// Select an option from a select element
+await new Select(driver.findElement(By.id("select-id"))).selectByValue("option-value");
+
+// Check or uncheck a checkbox
+await driver.findElement(By.id("checkbox-id")).click();
+
+// Enter text and press a keyboard key
+// add the following import to the top of the file
+const { Key } = require("selenium-webdriver");
+
+await driver.findElement(By.name("searchBox")).sendKeys("Selenium WebDriver", Key.RETURN);
+await driver.findElement(By.css("#my-input")).sendKeys("text to enter", Key.TAB);
+
 ```
 
-### Using Object Variables from External File:
+### Locator strategies in Selenium with JavaScript
+#### ID
+```js
+// Click a button using ID
+await driver.findElement(By.id("button-id")).click();
+```
+#### Class Name
+```js
+// Click a button using class name
+await driver.findElement(By.className("button-class")).click();
+```
+#### Name
+```js
+// Click a button using name
+await driver.findElement(By.name("button-name")).click();
+```
+#### Xpath
+```js
+// Click a button using XPath
+await driver.findElement(By.xpath("//button[text()='Click me']")).click();
 
-* Create a new JavaScript file, for example "external.js".
-* Move the object variable into the "external.js" file.
-* Export the variables using the module.exports statement:
-* In the file where you want to use these variables, import them using the require() function:
+```
 
-```javascript
-// external.js
+
+## Create new test in /test directory
+:bulb: Test name should end with either .**test**.js or .**spec**.js 
+```
+login.spec.js
+```
+## Create a basic linear script
+Developing an automated script using Selenium and JavaScript involves two phases: 
+- linear script development and 
+- page object model (POM) based script development. 
+
+In the linear script development phase, we develop the script by hardcoding the locators and data values directly into the script. This approach is quick and easy to implement but can be difficult to maintain and update in the long run.
+
+Once the linear script is developed, we can refactor it into a more efficient and maintainable page object model (POM) based script. In the POM based script development phase, we separate the locators and actions from the script into separate page object files.
+
+
+```js
+// login.spec.js
+// ===================
+
+const { Builder, By } = require("selenium-webdriver");
+const { expect } = require("chai");
+
+describe("Login page tests - Basic", function() {
+  this.timeout(50000);
+  let driver;
+
+  it("should allow a user to login with correct credentials", async function() {
+    driver = await new Builder().forBrowser("chrome").build();
+    await driver.get("https://the-internet.herokuapp.com/login");
+    await driver.findElement(By.name("username")).sendKeys("tomsmith");
+    await driver.findElement(By.name("password")).sendKeys("SuperSecretPassword!");
+    await driver.findElement(By.css(".radius")).click();
+
+    const successMsg = await driver.findElement(By.id("flash")).getText();
+    expect(successMsg).to.contain("You logged into a secure area!");
+    await driver.quit();
+  });
+
+  it("should display an error message for incorrect login", async function() {
+    driver = await new Builder().forBrowser("chrome").build();
+    await driver.get("https://the-internet.herokuapp.com/login");
+    await driver.findElement(By.name("username")).sendKeys("dummy");
+    await driver.findElement(By.name("password")).sendKeys("dummy");
+    await driver.findElement(By.css(".radius")).click();
+
+    const errorMsg = await driver.findElement(By.id("flash")).getText();
+    expect(errorMsg).to.contain("Your username is invalid!");
+    await driver.quit();
+  });
+});
+```
+
+# Run Test :heavy_check_mark:
+In terminal window run the following command:
+```shell
+npx mocha test\login.spec.js
+```
+
+![Screenshot](img/terminal_report.png)
+
+## Configure Test Run Command
+and specify default script timeout.
+
+Open **package.json** file and update **"scripts"** section as follows:
+
+```json
+  "scripts": {
+    "test": "mocha --timeout 10000"
+  }
+```
+
+## Run Test (new run comman)
+run all tests in the /test folder
+```
+npm test
+```
+run specific test
+```
+npm test test\login.spec.js
+```
+# Using Mochawesome Reporter
+## Update test run command
+
+Open **package.json** file and update **"scripts"** section as follows
+
+```json
+  "scripts": {
+    "test": "mocha --timeout 10000 --reporter mochawesome"
+  },
+  ```
+  then
+  ```
+  npm test
+  ```
+## View Mochawesome Report 
+Get location from the terminal window and open it in the brower, for example: 
+```shell
+[mochawesome] Report HTML saved to C:\_git_repos\selenium-mocha\mochawesome-report\mochawesome.html
+```
+## ...et voila! :sunglasses:
+![Screenshot](img/mochawesome.png)
+
+# Page Object Model Design Pattern
+Page Object Model (POM) is a common design pattern used in QA Automation.
+
+* With POM Web pages are represented with corresponding Classes (i.e LoginPage Class, HomePage Class).
+* GUI Elements Locators are stored in a separate Repository file (i.e locators.js).
+* Interactions with the elements are done via the Class methods (functions).
+* Tests contain function calls to perform required actions.
+
+Using POM design pattern makes the code more maintainable, readable, reusable and optimized.
+
+## Create additional files/folders
+
+### Locators/Data file
+
+```shell
+/resources/locators.js
+```
+Add the following content
+```js
+// locators.js
 // ===========
 
-// objects can be accesed using dot notation and bracket notation:
-
-// dot notation
-// data.username
-
-// bracket notation
-// data["username"]
-
+const locators = {
+  username: "#username",
+  password: "#password",
+  submitButton: 'button[type="submit"]',
+  errorMessage: "#flash.error",
+  successMessage:"#flash.success",
+  loginPageHeading: "h2",
+  secureAreaPageHeading: "h2",
+  logoutButton: ".button.secondary.radius",
+};
 
 const data = {
-    username: "tomsmith",
-    password: "SuperSecretPassword!",
-    baseUrl: "https://the-internet.herokuapp.com/",
-    pageTitle: "Welcome to the-internet"
+  baseUrl: "https://the-internet.herokuapp.com/login",
+  pageTitle: "The Internet",
+  username: "tomsmith",
+  password: "SuperSecretPassword!",
+  loginPageHeading: "Login Page",
+  secureAreaPageHeading: "Secure Area",
+  errorMessage: "Your username is invalid!",
+  successMessage: "You logged into a secure area!",
 };
-  
-  module.exports = { data };
-  
-  
-```
-Use variables from external file in jsrevew.js file:
-```javascript
-const { data } = require("./external");
 
-// You can now access the variables in your current file (jsreview.js) from external file, for example:
-console.log(data.username); // Output: "tomsmith"
-console.log(data.baseUrl); // Output: "https://the-internet.herokuapp.com/"
+module.exports = { locators, data };
 ```
 
-##  GitHub Update practice :octocat: 
+### Login Page Class file
 
-Run the following commands to push updates to GitHub repo:
-
-```bash
-git status
+```shell
+/pages/LoginPage.js
 ```
-```bash
-git add .
-```
-```bash
-git commit -m "JavaScript refresher files updates"
-```
-```bash
-git push
-```
+Add the following content
+```js
+// LoginPage.js
+// ==========
 
-Go to you GitHub repo in the browser, refresh the page and check the updates.
-
-## Functions in JavaScript
+const { By } = require("selenium-webdriver");
+const { expect } = require("chai");
+const { locators, data } = require("../resources/locators");
 
 
-```javascript
-// Step 1: Basic function
-function greet() {
-    console.log("Hello!");
+class LoginPage {
+
+  constructor(driver) {
+    this.driver = driver;
+  }
+
+  // class methods 
+
+  async goto() {
+    await this.driver.get(data.baseUrl);
+  }
+
+  async loginAs(username, password) {
+    await this.driver.findElement(By.css(locators.username)).sendKeys(username);
+    await this.driver.findElement(By.css(locators.password)).sendKeys(password);
+    await this.driver.findElement(By.css(locators.submitButton)).click();
+  }
+
+  async validatePageUrl(expectedUrl) {
+    const actualUrl = await this.driver.getCurrentUrl();
+    const res = expect(actualUrl).to.equal(expectedUrl);
+    return res;
+  }
+
+  async validatePageTitle(expectedTitle) {
+    const actualTitle = await this.driver.getTitle();
+    const res = expect(actualTitle).to.equal(expectedTitle);
+    return res;
+  }
+
+  async validateSuccessMessage() {
+    await this.validatePageText("successMessage");
+  }
+
+  async validateErrorMessage() {
+    await this.validatePageText("errorMessage");
+  }
+
+  async validateLoginPageHeading() {
+    await this.validatePageText("loginPageHeading");
+  }
+
+  async validateSecureAreaPageHeading() {
+    await this.validatePageText("secureAreaPageHeading");
+  }
+
+    async logout() {
+    await this.driver.findElement(By.css(locators.logoutButton)).click();
+  }
+
+  // common methods
+
+  async validatePageText(val) {
+    const element = await this.driver.findElement(By.css(locators[val]));
+    const txt = await element.getText();
+    const res = expect(txt).to.contain(data[val]);
+    return res;
+  }
 }
 
-greet(); // Output: Hello!
+module.exports = LoginPage;
+
+
 ```
 
-```javascript
-// Step 2: Function with arguments
-function greetByName(name) {
-    console.log(`Hello, ${name}!`);
-}
+### New Test File
 
-greetByName("John"); // Output: Hello, John!
+```shell
+/test/login.pom.spec.js
 ```
+Add the following code
+```js
+// login.pom.spec.js
+// page object model design pattern
+// ===================
 
-```javascript
-// Step 3: Function with a return value
+const { Builder } = require("selenium-webdriver");
+const LoginPage = require("../pages/LoginPage");
+const { data } = require("../resources/locators");
 
-function greetReturn(name) {
-    return "Hello, " + name + "!";
-}
+describe("Login page tests - POM, before() and after() hooks", function () {
+  let driver;
+  let loginPage;
 
-const greeting = greetReturn("John");
-console.log(greeting); // Output: Hello, John!
-```
+  before(async function () {
+    driver = await new Builder().forBrowser("chrome").build();
+    loginPage = new LoginPage(driver);
+    await loginPage.goto();
+  });
 
-## Using functions from external file
+  after(async function () {
+    if (driver) {
+      await driver.quit();
+    }
+  });
 
-### Add file external_functions.js
+  describe("1. Correct username and password", function () {
+    it("1.1. should show the secure area heading and success message", async function () {
+      await loginPage.validatePageTitle(data.pageTitle);
+      await loginPage.validatePageUrl(data.baseUrl);
+      await loginPage.loginAs(data.username, data.password);
+      await loginPage.validateSecureAreaPageHeading();
+      await loginPage.validateSuccessMessage();
+      await loginPage.logout();
+      await loginPage.validateLoginPageHeading();
+    });
+  });
 
-add the following code
-
-```javascript
-// external_functions.js
-// ===========
-
-
-function greet() {
-    console.log("Hello!");
-}
-
-function greetByName(name) {
-    console.log(`Hello, ${name}!`);
-}
-
-function greetReturn(name) {
-    return "Hello, " + name + "!";
-}
-  
-  // Export the functions <-- this allows using these functions from other files
-  module.exports = { greet, greetByName, greetReturn };
-  
-```
-
-## Use functions from external file in your main file
-
-in jsreview.js file:
-```javascript
-// Step 1: Import the functions from external_functions.js
-const { greet, greetByName, greetReturn } = require('./external_functions');
-```
-
-```javascript
-// Step 2: Use the functions
-greet(); // Output: Hello!
-
-greetByName("John"); // Output: Hello, John!
-
-const greeting1 = greetReturn("Jane");
-
-console.log(greeting1); // Output: Hello, Jane!
-```
-
-##  GitHub Update practice :octocat: 
-
-Run the following commands to push updates to GitHub repo:
+  describe("2. Incorrect username and/or password", function () {
+    it("2.1 should stay on Login page and show an error message", async function () {
+      await loginPage.loginAs("dummy", "dummy");
+      await loginPage.validateErrorMessage();
+      await loginPage.validateLoginPageHeading();
+    });
+  });
+});
 
 ```
-git status
+### Run New Test
+```shell
+npm test test/login.pom.spec.js
 ```
-```
-git add .
-```
-```
-git commit -m "JavaScript refresher files updates"
-```
-```
-git push
-```
+### View Results in Mochawesome Report
 
-Go to you GitHub repo in the browser, refresh the page and check the updates.
+![Screenshot](img/mochawesome_pom.png)
+
+# Use this project
+### clone to your machine
+```shell
+git clone https://github.com/kiseta/selenium-mocha.git
+```
+### Install Dependencies
+open project in VSCode, run in Terminal
+```shell
+npm install
+```
+### Run tests
+```shell
+npm test
+```
+### Adding More Tests
+
+* Add locators and data to locators.js file
+* Add new page file i.e. FormPage.js and create FormPage Class in it
+* Create corresponding methods in new FormPage Class
+* Create new test file and build a sequence of steps and validations
+* Run your tests!
+
+Good luck!  :rocket: :crossed_fingers: :four_leaf_clover: :thumbsup:
+
+<hr />
+
+## :bulb: About using `async` and `await` keywords
+
+The `async` and `await` keywords are used to make WebDriver API calls that return promises, such as driver.findElement and driver.get, and wait for them to complete before continuing execution of the test. 
+
+By using `await` with these calls, we ensure that the test doesn't continue until the browser has finished loading the page or found the element we are looking for, and we can then interact with the page in a predictable way.
+
+### Additional Resources:
+
+- Mozilla Developer Network (MDN) has a great guide to async/await, which covers the basics of how they work and includes code examples. You can find it here: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
+
+- The JavaScript.info website has an excellent in-depth tutorial on async/await, which covers topics like error handling, sequential and parallel execution, and more advanced concepts. You can find it here: https://javascript.info/async-await
+
+- The Node.js documentation also has a section on async/await, which covers how to use them with Node.js APIs and modules. You can find it here: https://nodejs.org/en/knowledge/getting-started/control-flow/what-are-callbacks/#promises
+
+## :crystal_ball: Troubleshooting
+
+When creating methods in your class file make sure each method (function) name starts with **async** keyword, each step that interacts with application starts with the  **await** keyword and when using the driver in class file refer to it using **this.driver** notation
+
+![Screenshot](img/troubleshooting.png)
+
