@@ -14,9 +14,9 @@
 
 ## How Selenium Works with different browsers
 To use Selenium with different browsers, you need to download and install the appropriate web driver for each browser you want to automate. Here's where you can download the drivers for each browser:
-
+```
 **Google Chrome**: The ChromeDriver can be downloaded from the official Selenium website at https://sites.google.com/chromium.org/driver/downloads. You can download the driver version that matches your Chrome browser version.
-
+```
 **Mozilla Firefox**: The GeckoDriver can be downloaded from the official Mozilla GitHub page at https://github.com/mozilla/geckodriver/releases. You can download the driver version that matches your Firefox browser version.
 
 **Microsoft Edge**: The EdgeDriver can be downloaded from the official Microsoft website at https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/. You can download the driver version that matches your Edge browser version.
@@ -103,6 +103,13 @@ npm install --save-dev mochawesome
 
 ### 6. Add .gitignore file to your project
 ```env
+
+# Dependency directories
+/mochawesome-report
+
+# Other
+/node_modules
+
 
 ```
 # Create Selenium script
