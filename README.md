@@ -103,7 +103,7 @@ npm install chai
 
 ### 5. Install Reporting Framework
 ```bash
-npm install --save-dev mochawesome
+npm install mochawesome
 ```
 
 ### 6. Add .gitignore file to your project
