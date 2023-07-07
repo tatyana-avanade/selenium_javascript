@@ -78,6 +78,7 @@ npm init -y
 ```
 
 ### 2. Install Selenium
+Learn more at https://www.npmjs.com/package/selenium-webdriver
 ```shell
 npm install selenium-webdriver
 ```
@@ -463,7 +464,7 @@ npm test test/login.pom.spec.js
 # Use this project
 ### clone to your machine
 ```shell
-git clone https://github.com/kiseta/selenium-mocha.git
+git clone https://github.com/tatyana-avanade/selenium_javascript.git
 ```
 ### Install Dependencies
 open project in VSCode, run in Terminal
