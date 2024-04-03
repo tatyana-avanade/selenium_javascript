@@ -2,8 +2,8 @@
 // ===========
 
 const locators = {
-    username: "#username",
-    password: "#password",
+    username: "username",
+    password: "password",
     email_field: "#email",
     submitButton: 'button[type="submit"]',
     errorMessage: "#flash.error",
@@ -14,9 +14,7 @@ const locators = {
   };
   
   const data = {
-    baseUrl: "https://the-internet.herokuapp.com/",
-    loginPageUrl: 'login',
-    forgotPasswordUrl: 'forgot_password',
+
     pageTitle: "The Internet",
     username: "tomsmith",
     password: "SuperSecretPassword!",
@@ -25,5 +23,13 @@ const locators = {
     errorMessage: "Your username is invalid!",
     successMessage: "You logged into a secure area!",
   };
+
+  const url = {
+    baseUrl: "https://the-internet.herokuapp.com/",
+    loginPageUrl: 'login',
+    forgotPasswordUrl: 'forgot_password',
+    optionsPageUrl: '',
+    selectPageUrl: ''
+  };
   
-  module.exports = { locators, data };
+  module.exports = { locators, data, url };

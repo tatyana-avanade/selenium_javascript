@@ -4,7 +4,7 @@
 
 const { Builder } = require("selenium-webdriver");
 const LoginPage = require("../pages/LoginPage");
-const { data } = require("../resources/locators");
+const { data, url } = require("../resources/locators");
 
 describe("Login page tests - POM, before() and after() hooks", function () {
   let driver;
@@ -25,7 +25,7 @@ describe("Login page tests - POM, before() and after() hooks", function () {
   describe("1. Correct username and password", function () {
     it("1.1. should show the secure area heading and success message", async function () {
       await loginPage.validatePageTitle(data.pageTitle);
-      await loginPage.validatePageUrl(data.baseUrl);
+      await loginPage.validatePageUrl(url.baseUrl + url.loginPageUrl);
       await loginPage.loginAs(data.username, data.password);
       await loginPage.validateSecureAreaPageHeading();
       await loginPage.validateSuccessMessage();

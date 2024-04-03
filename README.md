@@ -32,7 +32,7 @@ Once you have downloaded and installed the appropriate driver for each browser, 
 ## Install Browser Drivers (Chrome browser)
 
 * Check the version of your Browser.
-* Download compatible browser driver i.e [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads).
+* Download compatible browser driver i.e [chromedriver](https://chromedriver.chromium.org/downloads).
 * Extract the chromedriver.exe to the local directory, i.e. C:/Tools.
 * Add C:/Tools to the PATH variable (Environment Variable) - this step may require restart.
 * Verify the chromedriver.exe binary works by running the following command in a command prompt or terminal window:

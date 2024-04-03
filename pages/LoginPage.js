@@ -3,7 +3,7 @@
 
 const { By } = require("selenium-webdriver");
 const { expect } = require("chai");
-const { locators, data } = require("../resources/locators");
+const { locators, data, url } = require("../resources/locators");
 
 
 class LoginPage {
@@ -15,12 +15,12 @@ class LoginPage {
   // class methods 
 
   async goto() {
-    await this.driver.get(data.baseUrl);
+    await this.driver.get(url.baseUrl + url.loginPageUrl);
   }
 
   async loginAs(username, password) {
-    await this.driver.findElement(By.css(locators.username)).sendKeys(username);
-    await this.driver.findElement(By.css(locators.password)).sendKeys(password);
+    await this.driver.findElement(By.name(locators.username)).sendKeys(username);
+    await this.driver.findElement(By.name(locators.password)).sendKeys(password);
     await this.driver.findElement(By.css(locators.submitButton)).click();
   }
 
@@ -57,7 +57,6 @@ class LoginPage {
   }
 
   // common methods
-
   async validatePageText(val) {
     const element = await this.driver.findElement(By.css(locators[val]));
     const txt = await element.getText();
