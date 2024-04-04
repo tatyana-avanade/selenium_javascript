@@ -92,7 +92,7 @@ The "***npm install mocha-selenium***" command installs the ***Mocha Selenium ad
 ```shell
 npm install mocha
 ```
-```
+```shell
 npm install mocha-selenium
 ```
 
@@ -115,8 +115,8 @@ npm install mochawesome
 # Other
 /node_modules
 
-
 ```
+
 # Create Selenium script
 
 ### Common interactions with web elements using Selenium and JavaScript
@@ -124,20 +124,25 @@ npm install mochawesome
 ```js
 // Click a button
 await driver.findElement(By.id("button-id")).click();
-
+```
+```js
 // Type text into a text field
 await driver.findElement(By.id("text-field-id")).sendKeys("Hello, World!");
-
+```
+```js
 // Get the text content of an element (div)
 var divText = await driver.findElement(By.id("div-id")).getText();
 console.log(divText);
-
+```
+```js
 // Select an option from a select element
 await new Select(driver.findElement(By.id("select-id"))).selectByValue("option-value");
-
+```
+```js
 // Check or uncheck a checkbox
 await driver.findElement(By.id("checkbox-id")).click();
-
+```
+```js
 // Enter text and press a keyboard key
 // add the following import to the top of the file
 const { Key } = require("selenium-webdriver");

@@ -1,0 +1,29 @@
+
+
+  Login page tests - POM, before() and after() hooks
+    1. Correct username and password
+      ✔ 1.1. should show the secure area heading and success message (873ms)
+    2. Incorrect username and/or password
+      ✔ 2.1 should stay on Login page and show an error message (423ms)
+
+  Login page tests - Basic
+    ✔ should allow a user to login with correct credentials (9174ms)
+    ✔ should display an error message for incorrect login (4448ms)
+
+  Checkbox tests
+    ✔ should select checkbox 1 and assert it's selected (2930ms)
+    ✔ should unselect checkbox 2 and assert it's unselected (1750ms)
+
+  Dropdown list tests
+    ✔ should select option 1 from the list and assert it's selected (1265ms)
+
+  JavaScript alerts tests
+    ✔ Js Alert test (1275ms)
+
+
+  8 passing (35s)
+
+[mochawesome] Report JSON saved to C:\_github\selenium_javascript\mochawesome-report\mochawesome.json
+
+[mochawesome] Report HTML saved to C:\_github\selenium_javascript\mochawesome-report\mochawesome.html
+
