@@ -301,28 +301,37 @@ Add the following content
 // ===========
 
 const locators = {
-  username: "#username",
-  password: "#password",
-  submitButton: 'button[type="submit"]',
-  errorMessage: "#flash.error",
-  successMessage:"#flash.success",
-  loginPageHeading: "h2",
-  secureAreaPageHeading: "h2",
-  logoutButton: ".button.secondary.radius",
-};
+    username: "username",
+    password: "password",
+    email_field: "#email",
+    submitButton: 'button[type="submit"]',
+    errorMessage: "#flash.error",
+    successMessage:"#flash.success",
+    loginPageHeading: "h2",
+    secureAreaPageHeading: "h2",
+    logoutButton: ".button.secondary.radius",
+  };
+  
+  const data = {
 
-const data = {
-  baseUrl: "https://the-internet.herokuapp.com/login",
-  pageTitle: "The Internet",
-  username: "tomsmith",
-  password: "SuperSecretPassword!",
-  loginPageHeading: "Login Page",
-  secureAreaPageHeading: "Secure Area",
-  errorMessage: "Your username is invalid!",
-  successMessage: "You logged into a secure area!",
-};
+    pageTitle: "The Internet",
+    username: "tomsmith",
+    password: "SuperSecretPassword!",
+    loginPageHeading: "Login Page",
+    secureAreaPageHeading: "Secure Area",
+    errorMessage: "Your username is invalid!",
+    successMessage: "You logged into a secure area!",
+  };
 
-module.exports = { locators, data };
+  const url = {
+    baseUrl: "https://the-internet.herokuapp.com/",
+    loginPageUrl: 'login',
+    forgotPasswordUrl: 'forgot_password',
+    optionsPageUrl: '',
+    selectPageUrl: ''
+  };
+  
+  module.exports = { locators, data, url };
 ```
 
 ### Login Page Class file
@@ -337,7 +346,7 @@ Add the following content
 
 const { By } = require("selenium-webdriver");
 const { expect } = require("chai");
-const { locators, data } = require("../resources/locators");
+const { locators, data, url } = require("../resources/locators");
 
 
 class LoginPage {
@@ -349,12 +358,12 @@ class LoginPage {
   // class methods 
 
   async goto() {
-    await this.driver.get(data.baseUrl);
+    await this.driver.get(url.baseUrl + url.loginPageUrl);
   }
 
   async loginAs(username, password) {
-    await this.driver.findElement(By.css(locators.username)).sendKeys(username);
-    await this.driver.findElement(By.css(locators.password)).sendKeys(password);
+    await this.driver.findElement(By.name(locators.username)).sendKeys(username);
+    await this.driver.findElement(By.name(locators.password)).sendKeys(password);
     await this.driver.findElement(By.css(locators.submitButton)).click();
   }
 
@@ -391,7 +400,6 @@ class LoginPage {
   }
 
   // common methods
-
   async validatePageText(val) {
     const element = await this.driver.findElement(By.css(locators[val]));
     const txt = await element.getText();
@@ -401,8 +409,6 @@ class LoginPage {
 }
 
 module.exports = LoginPage;
-
-
 ```
 
 ### New Test File
@@ -418,7 +424,7 @@ Add the following code
 
 const { Builder } = require("selenium-webdriver");
 const LoginPage = require("../pages/LoginPage");
-const { data } = require("../resources/locators");
+const { data, url } = require("../resources/locators");
 
 describe("Login page tests - POM, before() and after() hooks", function () {
   let driver;
@@ -439,7 +445,7 @@ describe("Login page tests - POM, before() and after() hooks", function () {
   describe("1. Correct username and password", function () {
     it("1.1. should show the secure area heading and success message", async function () {
       await loginPage.validatePageTitle(data.pageTitle);
-      await loginPage.validatePageUrl(data.baseUrl);
+      await loginPage.validatePageUrl(url.baseUrl + url.loginPageUrl);
       await loginPage.loginAs(data.username, data.password);
       await loginPage.validateSecureAreaPageHeading();
       await loginPage.validateSuccessMessage();
@@ -456,6 +462,7 @@ describe("Login page tests - POM, before() and after() hooks", function () {
     });
   });
 });
+
 
 ```
 ### Run New Test

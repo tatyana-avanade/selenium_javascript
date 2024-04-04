@@ -1,0 +1,20 @@
+pool:
+  vmImage: 'windows-latest'
+
+trigger:
+  branches:
+    include:
+      - 'main'
+
+name: $(Build.BuildId)
+
+stages:
+
+  - stage: qa
+    displayName: 'Run Automation Test - QA'
+    dependsOn: []
+    jobs:
+      - template: pipeline_template.yml
+        parameters:
+          TEST_USER_PASSWORD: ''
+          BASE_URL: ''
